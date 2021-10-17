@@ -56,7 +56,7 @@ int partition(int A[], int low, int high)
 int main()
 {
    
-    int A[] = {9, 4, 4, 8, 7, 5, 6};
+    int A[] = {1, 9, 2, 8, 3, 7, 4};
        int n = 9;
     n =7;
     printArray(A, n);
