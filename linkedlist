@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *link;
+
+};
+struct node*reverse(struct node*head){
+    struct node*temp=head;
+    struct node*current=temp;
+    struct node*previous= NULL;
+    while(temp!=NULL){
+        temp=temp->link;
+        current->link=previous;
+        previous = current;
+        current = temp;
+    }
+    head = previous;
+    return head;
+};
+void updatenode(int old,int newdata,struct node*head){
+    struct node*temp;
+    if(head==NULL){
+        printf("\n list is empty");
+    }
+        else{
+            temp=head;
+            while(temp->link!=NULL){
+temp=temp->link;
+                if(temp->data==old);
+                {
+                    temp->data=newdata;
+                   break;
+                     //temp=temp->link;
+
+                }
+            }
+        }
+    }
+
+struct node *delete1(struct node*head){
+    struct node* ptr =head;
+    head=head->link;
+    free(ptr);
+    return head;
+};
+struct node *deleteinbtw(struct node*head,int index){
+    struct node* p =head;
+    struct node* q =head->link;
+    for(int i =0;i< index-1;i++)
+    {
+        p = p->link;
+        q = q->link;
+    }
+    p->link=q->link;
+    free(q);
+    return head;
+};
+void traversel(struct node *ptr)
+{
+    while(ptr!=NULL)
+    {
+        printf(" element :%d\n",ptr->data);
+        ptr= ptr->link;
+    }
+}
+struct node *insert0(struct node*head,int data){
+    struct node*ptr =(struct node*)malloc(sizeof(struct node));
+    ptr->link =head;
+    ptr ->data =data;
+    return ptr;
+};
+struct node *insertinbtw(struct node*head,int data ,int index){
+    struct node*ptr =(struct node*)malloc(sizeof(struct node));
+    struct node * p = head;
+    int i = 0;
+    while(i!=index-1){
+        p =p->link;
+        i++;
+    }
+    ptr->data=data;
+    ptr->link = p->link;
+    p->link=ptr;
+    return head;
+}
+
+int main()
+{
+    struct node *head =NULL;
+    struct node *second =NULL;
+    struct node *third=NULL;
+   head = (struct node*)malloc(sizeof(struct node));
+   second = (struct node*)malloc(sizeof(struct node));
+   third = (struct node*)malloc(sizeof(struct node));
+    head->data = 0;
+    head->link = second;
+    second->data =1;
+    second->link =third;
+    third->data = 2;
+    third->link = NULL;
+    traversel(head);
+    printf("insert\n");
+    head = insert0(head,4);
+    insertinbtw(head,56,1);
+    traversel(head);
+    printf("delete\n");
+    //head =delete1(head);
+    deleteinbtw(head,3);
+    traversel(head);
+    printf("reverse\n");
+    head=reverse(head);
+    traversel(head);
+    printf("update\n");
+    updatenode(3,5,head);
+    traversel(head);
+
+    return 0;
+}
