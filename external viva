@@ -1,0 +1,34 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+void Postfix(char *a)   
+{    stack <char> s;
+    char output[50],t;
+    for(int i=0;a[i]!='\0';i++)
+    {   char infix  = a[i];
+        switch(infix)
+        {
+        case '^':
+        case '-': 
+        case '+':
+        case '/':
+        case '*':   s.push(infix);
+                    break;
+        case ')': t=s.top();
+                    s.pop();
+                   cout<<t;
+                    break;
+        }
+        if (isalpha(infix))
+            cout<<infix;
+    }
+}
+int main()
+{
+    char a[] = "((a*b)+(c-d))";
+    cout<<" your infix expression"<<endl;
+    cout<<a<<endl;
+     cout<<" your postfix expression"<<endl;
+    Postfix(a);
+    return 0;
+}
